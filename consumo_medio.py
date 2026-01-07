@@ -7,6 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # UNIDADE 
 nome_fazenda = 'santo expedito'
@@ -30,8 +34,8 @@ fazenda = {"santa lucia":{'cod':'8942926277652785356','nome': 'SANTA LUCIA'},
 driver.get("https://admfranciosi206624.totvsagro.cloudtotvs.com.br/pimsmc/login.jsp")
 driver.maximize_window()
 
-wait.until(EC.visibility_of_element_located((By.ID, 'USER'))).send_keys('yan.vieira')
-wait.until(EC.visibility_of_element_located((By.ID, 'SENHA'))).send_keys('Y@sf01*')
+wait.until(EC.visibility_of_element_located((By.ID, 'USER'))).send_keys(str(os.getenv('APP_USER')))
+wait.until(EC.visibility_of_element_located((By.ID, 'SENHA'))).send_keys(str(os.getenv('APP_SENHA')))
 wait.until(EC.element_to_be_clickable((By.ID, 'Login'))).click()
 
 wait.until(EC.element_to_be_clickable((By.ID, 'nps-button-remove'))).click()
